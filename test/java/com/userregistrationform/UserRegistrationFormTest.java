@@ -104,6 +104,36 @@ public class UserRegistrationFormTest {
         boolean check = user.passwordCheck_ForAtLeast_OneNumericCharacter("Qwerty123@");
         Assert.assertEquals(true, check);
     }
+    
+    @Test
+    /*UC8-validating password for exactly one special character should return true
+    * and all rule should passed
+    */
+    public void givenPassword_WithExactlyOneSpecialCharacter_ShouldReturnTrue()
+    {
+        
+        boolean check = user.passwordCheck_ForExactly_OneSpecialCharacter("Qwerty12@");
+        Assert.assertEquals(true,check);
+    }
+    
+    @Test
+    //UC9-validating email should return true
+    public void givenEmail_ShouldReturnTrue()
+    {
+        
+        boolean check = user.emailCheck("yash123@gmil.com");
+        Assert.assertEquals(true,check);
+    }
+
+    @Test
+    //UC9-validating email should return false
+    public void givenEmail_ShouldReturnFalse()
+    {
+        
+        boolean check = user.emailCheck("@gmil.com");
+        Assert.assertEquals(false,check);
+    }
+
 }
 
 

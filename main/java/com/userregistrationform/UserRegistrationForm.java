@@ -54,4 +54,20 @@ public class UserRegistrationForm {
                   && Pattern.matches(".*[A-Z].*", number)
                   && Pattern.matches(".*[0-9].*", number)) == true);
       }
+      
+    //UC8-validating password for exactly 1 special character
+      public boolean passwordCheck_ForExactly_OneSpecialCharacter(String password)
+      {
+          return ((Pattern.matches("[A-Z0-9a-z$%&*@!#]{8,}", password)
+                  && Pattern.matches(".*[A-Z].*", password)
+                  && Pattern.matches(".*[0-9].*", password)
+                  && Pattern.matches(".*[\\W]{1}.*", password)) == true);
+
+      }
+      
+    //UC9-validating email
+      public boolean emailCheck(String email)
+      {
+          return (Pattern.matches("[a-z A-Z 0-9][a-z A-Z 0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+", email)) == true;
+      }
 }
