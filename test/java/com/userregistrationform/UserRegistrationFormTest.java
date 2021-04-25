@@ -22,7 +22,7 @@ public class UserRegistrationFormTest {
 	// UC2-to validate last name if first letter is in upperCase
 	public void givenLastName_WhereCapitaLetter_ShouldReturnTrue()
 	{
-		
+
 		boolean check = user.lastName("Kumar");
 		Assert.assertEquals(true,check);
 	}
@@ -30,36 +30,52 @@ public class UserRegistrationFormTest {
 	//UC2-to validate last name if first letter is in lowerCase
 	public void givenLastName_WhereLowerCase_ShouldReturnFalse()
 	{
-		
+
 		boolean check = user.lastName("kumar");
 		Assert.assertEquals(false,check);
 	}
-	
+
 	@Test
-    //UC3-to validate emailID
-    public void givenEmailId_ShouldReturnTrue()
+	//UC3-to validate emailID
+	public void givenEmailId_ShouldReturnTrue()
+	{
+
+		boolean check = user.emailId("rehansdm94@gmail.com");
+		Assert.assertEquals(true,check);
+	}
+
+	@Test
+	// UC4-validating mobile number with country code followed by space and number
+	public void givenMobileNumber_ShouldReturnTrue()
+	{
+
+		boolean check = user.mobileNo("91 9134567872");
+		Assert.assertEquals(true,check);
+	}
+	//UC4-validating mobile number without country code followed by space
+	@Test
+	public void givenMobileNumber_ShouldReturnFalse()
+	{
+
+		boolean check = user.mobileNo("9123456624");
+		Assert.assertEquals(false,check);
+	}
+	
+	//UC5-validating for password with minimum 8 characters should return true
+    public void givenPassword_ShouldReturnTrue()
     {
         
-        boolean check = user.emailId("rehansdm94@gmail.com");
+        boolean check = user.passwordCheck("qwerty123@");
         Assert.assertEquals(true,check);
     }
-	
-	 @Test
-	    // UC4-validating mobile number with country code followed by space and number
-	    public void givenMobileNumber_ShouldReturnTrue()
-	    {
-	        
-	        boolean check = user.mobileNo("91 9134567872");
-	        Assert.assertEquals(true,check);
-	    }
-	    //UC4-validating mobile number without country code followed by space
-	    @Test
-	    public void givenMobileNumber_ShouldReturnFalse()
-	    {
-	       
-	        boolean check = user.mobileNo("9123456624");
-	        Assert.assertEquals(false,check);
-	    }
+    @Test
+    //UC5-validating password having less than 8 characters should return false
+    public void givenPassword_ShouldReturnFalse()
+    {
+        
+        boolean check = user.passwordCheck("yetet@");
+        Assert.assertEquals(false,check);
+    }
 }
 
 

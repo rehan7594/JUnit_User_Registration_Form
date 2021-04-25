@@ -30,4 +30,10 @@ public class UserRegistrationForm {
     {
         return(Pattern.matches("(0|91)?\\s{1}[6-9][0-9]{9}", number) == true);
     }
+    
+  //UC5-validating password with minimum 8 characters
+    public boolean passwordCheck(String password)
+    {
+        return (Pattern.matches("[A-Z0-9a-z$%&*@!#]{8,}", password) == true);
+    }
 }
