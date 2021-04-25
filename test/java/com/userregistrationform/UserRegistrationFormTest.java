@@ -93,6 +93,17 @@ public class UserRegistrationFormTest {
         boolean check = user.passwordCheckForAtLeastOneUpperCase("qwerty123@");
         Assert.assertEquals(false,check);
     }
+    
+    @Test
+    /*UC-7-validating password having minimum 8 character
+     * password having minimum 1 upperCase character and
+     * password will have minimum 1 numeric value
+     */
+    public void givenPassword_WithMinimumOneNumber_ShouldReturnTrue() {
+        
+        boolean check = user.passwordCheck_ForAtLeast_OneNumericCharacter("Qwerty123@");
+        Assert.assertEquals(true, check);
+    }
 }
 
 
