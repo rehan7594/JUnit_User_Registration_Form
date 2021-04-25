@@ -36,4 +36,11 @@ public class UserRegistrationForm {
     {
         return (Pattern.matches("[A-Z0-9a-z$%&*@!#]{8,}", password) == true);
     }
+    
+  //UC6-validating password having atleast 1 upperCase character should return true
+    public boolean passwordCheckForAtLeastOneUpperCase(String password)
+    {
+        return ((Pattern.matches("[A-Z0-9a-z$%&*@!#]{8,}", password)
+                && Pattern.matches(".*[A-Z].*", password)) == true);
+    }
 }

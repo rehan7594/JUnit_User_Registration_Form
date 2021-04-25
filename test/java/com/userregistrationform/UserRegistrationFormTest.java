@@ -76,6 +76,23 @@ public class UserRegistrationFormTest {
         boolean check = user.passwordCheck("yetet@");
         Assert.assertEquals(false,check);
     }
+    
+    @Test
+    //UC6-validating password having minimum 1 upperCase character should return true
+    public void givenPassword_ForMinimumOneUpperCase_ShouldReturnTrue()
+    {
+        
+        boolean check = user.passwordCheckForAtLeastOneUpperCase("Qwerty123@");
+        Assert.assertEquals(true,check);
+    }
+    @Test
+    //UC6-validating password having no upperCase character should return false
+    public void givenPassword_WithNoUpperCase_ShouldReturnFalse()
+    {
+       
+        boolean check = user.passwordCheckForAtLeastOneUpperCase("qwerty123@");
+        Assert.assertEquals(false,check);
+    }
 }
 
 
