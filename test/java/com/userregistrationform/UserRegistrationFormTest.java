@@ -1,136 +1,104 @@
 package com.userregistrationform;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class UserRegistrationFormTest {
 
-	UserRegistrationForm user= new UserRegistrationForm();
+	private UserRegistrationForm userRegistration;
 
-	@Test
-	//UC1-to validate first name should return Happy
-	public void firstNameValidation_ShouldReturnHappy() {
+	
+	@Rule
+	public ExpectedException exceptionRule = ExpectedException.none();
 
-		String result = user.firstName("Rehan");
-		Assert.assertEquals("Happy",result);
-	}
-	@Test
-	//UC1-to validate first name should return Sad
-	public void givenFirstName_WhereLowerCase_ShouldReturnSad() {
-
-		String  result = user.firstName("ras");
-		Assert.assertEquals("Sad", result);
+	public UserRegistrationFormTest() {
+		userRegistration = new UserRegistrationForm();
 	}
 
+	// Unit Test For First Name
 	@Test
-	// UC2-to validate last name if first letter is in upperCase should retrun happy
-	public void givenLastName_WhereCapitaLetter_ShouldReturnHappy()
-	{
-		String result = user.lastName("Kumar");
-		Assert.assertEquals("Happy",result);
+	public void validateName() {
+		String name = "Rehan";
+		boolean result = userRegistration.validateName(name);
+		Assert.assertTrue(result);
 	}
 
+	// Unit Test For Invalid First Name
 	@Test
-	//UC2-to validate last name if first letter is in lowerCase should return sad
-	public void givenLastName_WhereLowerCase_ShouldReturnSad()
-	{
-		String result = user.lastName("kumar");
-		Assert.assertEquals("Sad",result);
+	public void validateInvalidName() {
+		exceptionRule.expect(UserRegistrationException.class);
+		exceptionRule.expectMessage("First Name is Invalid");
+
+		String name = "rehan";
+		userRegistration.validateName(name);
 	}
 
+	// Unit Test For Last Name
 	@Test
-	//UC3-to validate emailID should return Happy
-	public void givenEmailId_ShouldReturnHappy()
-	{
-		String  result = user.emailId("rehansdm94@gmail.com");
-		Assert.assertEquals("Happy",result);
+	public void validateLastName() {
+		String lastname = "Kumar";
+		boolean result = userRegistration.validateLastName(lastname);
+		Assert.assertTrue(result);
 	}
 
+	// Unit Test For Invalid Last Name
 	@Test
-	//UC3-to validate emailID should return Sad
-	public void givenEmailId_ShouldReturnSad()
-	{
-		String  result = user.emailId("@123@gmail.com");
-		Assert.assertEquals("Sad",result);
+	public void validateInvalidLastName() {
+		exceptionRule.expect(UserRegistrationException.class);
+		exceptionRule.expectMessage("Last Name is Invalid");
+
+		String lastName = "kumar";
+		userRegistration.validateLastName(lastName);
 	}
 
+	// Unit Test For Email
 	@Test
-	// UC4-validating mobile number with country code followed by space and number should return Happy
-	public void givenMobileNumber_ShouldReturnHappy()
-	{
-		String check = user.mobileNo("91 9134567872");
-		Assert.assertEquals("Happy",check);
+	public void validateEmail() {
+		String email = "Rehansdm94@gmail.com";
+		boolean result = userRegistration.validateEmail(email);
+		Assert.assertTrue(result);
 	}
 
-	//UC4-validating mobile number without country code followed by space should return Sad
+	// Unit Test For Invalid Email
 	@Test
-	public void givenMobileNumber_ShouldReturnSad()
-	{
-		String check = user.mobileNo("9123456624");
-		Assert.assertEquals("Sad",check);
-	}
+	public void validateInvalidEmail() {
+		exceptionRule.expect(UserRegistrationException.class);
+		exceptionRule.expectMessage("Email is Invalid");
 
-	@Test
-	//UC5-validating for password with minimum 8 characters should return Happy
-	public void givenPassword_ShouldReturnHappy()
-	{
-		String check = user.passwordCheck("qwerty123@");
-		Assert.assertEquals("Happy",check);
+		String email = "rehansdm94@gmail.com";
+		userRegistration.validateEmail(email);
 	}
 
 	@Test
-	//UC5-validating password having less than 8 characters should return Sad
-	public void givenPassword_ShouldReturnSad()
-	{
-		String check = user.passwordCheck("yetet@");
-		Assert.assertEquals("Sad",check);
+	public void validateMobileNumber() {
+		String mobileNumber = "91 8217646327";
+		boolean result = userRegistration.validateMobileNumber(mobileNumber);
+		Assert.assertTrue(result);
+	}
+
+	// Unit Test For Invalid Mobile Number
+	@Test
+	public void validateInvalidMobileNumber() {
+		exceptionRule.expect(UserRegistrationException.class);
+		exceptionRule.expectMessage("Mobile Number is Invalid");
+		String mobileNumber = "8217646327";
+		userRegistration.validateEmail(mobileNumber);
 	}
 
 	@Test
-	//UC6-validating password having minimum 1 upperCase character should return Happy
-	public void givenPassword_ForMinimumOneUpperCase_ShouldReturnHappy()
-	{
-		String check = user.passwordCheck_ForAtLeast_OneUpperCase("Qwerty123@");
-		Assert.assertEquals("Happy",check);
+	public void validatePassword() {
+		String password = "Rehan@7594";
+		boolean result = userRegistration.validatePassword(password);
+		Assert.assertTrue(result);
 	}
 
+	// Unit Test For Invalid Password
 	@Test
-	//UC6-validating password having no upperCase character should return Sad
-	public void givenPassword_WithNoUpperCase_ShouldReturnSad()
-	{
-		String check = user.passwordCheck_ForAtLeast_OneUpperCase("qwerty123@");
-		Assert.assertEquals("Sad",check);
+	public void validateInvalidPassword() {
+		exceptionRule.expect(UserRegistrationException.class);
+		exceptionRule.expectMessage("Password is Invalid");
+		String password = "r123pdf2";
+		userRegistration.validateEmail(password);
 	}
-
-	@Test
-	/*UC7-validating password having minimum 8 character
-	 * password having minimum 1 upperCase character and
-	 * password will have minimum 1 numeric value
-	 */
-	public void givenPassword_WithMinimumOneNumber_ShouldReturnHappy() {
-		String check = user.passwordCheck_ForAtLeast_OneNumericCharacter("Qwerty123@");
-		Assert.assertEquals("Happy", check);
-	}
-
-	@Test
-	/*UC8-validating password for exactly one special character should return true
-	 * and all rule should passed
-	 */
-	public void givenPassword_WithExactlyOneSpecialCharacter_ShouldReturnHappy()
-	{
-		String  check = user.passwordCheck_ForExactly_OneSpecialCharacter("Qwerty12@");
-		Assert.assertEquals("Happy",check);
-	}
-
-	@Test
-	/*UC8-validating password for exactly no special character should return sad
-	 * and all rule should passed
-	 */
-	public void givenPassword_WithExactlyOneSpecialCharacter_ShouldReturnSad()
-	{
-		String  check = user.passwordCheck_ForExactly_OneSpecialCharacter("Qwerty12");
-		Assert.assertEquals("Sad",check);
-	}
-
 }
-
-
