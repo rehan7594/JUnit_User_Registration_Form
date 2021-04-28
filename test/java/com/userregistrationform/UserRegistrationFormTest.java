@@ -8,10 +8,6 @@ public class UserRegistrationFormTest {
 
 	private UserRegistrationForm userRegistration;
 
-	
-	@Rule
-	public ExpectedException exceptionRule = ExpectedException.none();
-
 	public UserRegistrationFormTest() {
 		userRegistration = new UserRegistrationForm();
 	}
@@ -27,11 +23,11 @@ public class UserRegistrationFormTest {
 	// Unit Test For Invalid First Name
 	@Test
 	public void validateInvalidName() {
-		exceptionRule.expect(UserRegistrationException.class);
-		exceptionRule.expectMessage("First Name is Invalid");
+
 
 		String name = "rehan";
-		userRegistration.validateName(name);
+		boolean result = userRegistration.validateName(name);
+		Assert.assertEquals( false, result);
 	}
 
 	// Unit Test For Last Name
@@ -45,11 +41,11 @@ public class UserRegistrationFormTest {
 	// Unit Test For Invalid Last Name
 	@Test
 	public void validateInvalidLastName() {
-		exceptionRule.expect(UserRegistrationException.class);
-		exceptionRule.expectMessage("Last Name is Invalid");
+
 
 		String lastName = "kumar";
-		userRegistration.validateLastName(lastName);
+		boolean result = userRegistration.validateLastName(lastName);
+		Assert.assertEquals( false, result);
 	}
 
 	// Unit Test For Email
@@ -63,11 +59,11 @@ public class UserRegistrationFormTest {
 	// Unit Test For Invalid Email
 	@Test
 	public void validateInvalidEmail() {
-		exceptionRule.expect(UserRegistrationException.class);
-		exceptionRule.expectMessage("Email is Invalid");
 
-		String email = "rehansdm94@gmail.com";
-		userRegistration.validateEmail(email);
+
+		String email = "rehansdm94@com";
+		boolean result = userRegistration.validateEmail(email);
+		Assert.assertEquals( false, result);
 	}
 
 	@Test
@@ -80,10 +76,10 @@ public class UserRegistrationFormTest {
 	// Unit Test For Invalid Mobile Number
 	@Test
 	public void validateInvalidMobileNumber() {
-		exceptionRule.expect(UserRegistrationException.class);
-		exceptionRule.expectMessage("Mobile Number is Invalid");
+
 		String mobileNumber = "8217646327";
-		userRegistration.validateEmail(mobileNumber);
+		boolean result = userRegistration.validateEmail(mobileNumber);
+		Assert.assertEquals( false, result);
 	}
 
 	@Test
@@ -96,9 +92,9 @@ public class UserRegistrationFormTest {
 	// Unit Test For Invalid Password
 	@Test
 	public void validateInvalidPassword() {
-		exceptionRule.expect(UserRegistrationException.class);
-		exceptionRule.expectMessage("Password is Invalid");
+
 		String password = "r123pdf2";
-		userRegistration.validateEmail(password);
+		boolean result = userRegistration.validateEmail(password);
+		Assert.assertEquals( false, result);
 	}
 }
